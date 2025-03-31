@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Samia Hossain</title>
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://kit.fontawesome.com/e7aa8b513f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="project-details.css">
+    <style>
+        /* Override problematic CSS rules */
+        #header, #about, #portfolio, #contact {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Ensure proper display of work items */
+        .work.visible {
+            display: block !important;
+        }
+        
+        /* Fix header visibility */
+        #header {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo2.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <i class="fas fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    </div>
+
+    <div id="portfolio" class="visible">
+        <div class="container">
+            <h1 class="sub-title2">Team-Based Projects</h1>
+            <div class="work-list">
+                <div class="work visible">
+                    <img src="images/work-9.png">
+                    <div class="layer">
+                        <h3>Autonomous Fire Extinguishing Robot</h3>
+                        <p>Built a robot with flame sensors, ESP32/ESP8266, and Arduino-based control for autonomous fire detection and extinguishing.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work visible">
+                    <img src="images/work-8.png">
+                    <div class="layer">
+                        <h3>Frequency Converter with Real-time Display</h3>
+                        <p>Designed a 50 Hz to 60 Hz frequency converter with real-time frequency monitoring, utilizing a half-bridge inverter and SG3524 IC.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work visible">
+                    <img src="images/work-7.png">
+                    <div class="layer">
+                        <h3>Automated Railway Trafficking</h3>
+                        <p>Developed an FSM-based railway traffic light control system, tested via Proteus simulation and hardware implementation.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work visible">
+                    <img src="images/work-6.png">
+                    <div class="layer">
+                        <h3>Biometric Authentication System</h3>
+                        <p>Implemented a voice-based classroom authentication system using MFCC and KNN in MATLAB, enhancing security and access control.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <!-- Hidden projects initially -->
+                <div class="work hidden">
+                    <img src="images/work-5.png">
+                    <div class="layer">
+                        <h3>Smart Greenhouse Management</h3>
+                        <p>Designed an IoT-based system for real-time greenhouse monitoring and fire detection using Arduino UNO, ESP8266, and cloud data processing.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work hidden">
+                    <img src="images/work-4.png">
+                    <div class="layer">
+                        <h3>Renewable Energy Grid Modeling</h3>
+                        <p>Developed a MATLAB/Simulink model analyzing overload fault scenarios (LLLG, line-to-line) in IEEE 6 BUS systems with solar and wind energy integration.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work hidden">
+                    <img src="images/work-3.png">
+                    <div class="layer">
+                        <h3>Motor Rewinding & Maintenance</h3>
+                        <p>Rewound a single-phase induction motor to restore performance, following a systematic rewiring approach.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work hidden">
+                    <img src="images/work-2.png">
+                    <div class="layer">
+                        <h3>Analog Circuit Design</h3>
+                        <p>Designed a 2-digit input analog calculator using op-amps, simulated in PSpice to balance speed and accuracy in analog computation.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work hidden">
+                    <img src="images/work-1.png">
+                    <div class="layer">
+                        <h3>Simulation & Numerical Analysis</h3>
+                        <p>Simulated 2D steady-state heat conduction with heat generation using MATLAB, applying numerical methods to analyze temperature distribution.</p>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" id="toggle-btn">See More</button>
+        </div>
+    </div>
+
+    <div id="project-details-overlay" class="project-details-overlay">
+        <div class="project-details-container">
+            <button class="close-details">&times;</button>
+            <div class="project-details-content">
+                <!-- Project details will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM loaded");
+            
+            // Handle the preloader
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.display = 'none';
+            }
+            
+            // Handle the work items visibility
+            const works = document.querySelectorAll(".work");
+            const toggleBtn = document.getElementById("toggle-btn");
+            let expanded = false;
+
+            function updateVisibility() {
+                console.log("Updating visibility, expanded:", expanded);
+                works.forEach((work, index) => {
+                    if (index < 4 || expanded) {
+                        work.classList.add("visible");
+                        work.classList.remove("hidden");
+                    } else {
+                        work.classList.add("hidden");
+                        work.classList.remove("visible");
+                    }
+                });
+
+                toggleBtn.textContent = expanded ? "See Less" : "See More";
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener("click", function () {
+                    console.log("Toggle button clicked");
+                    expanded = !expanded;
+                    updateVisibility();
+                });
+            }
+
+            updateVisibility();
+        });
+
+        // Expanded project details with What,myContribution, Result structure
+        const projectDetails = {
+            'Simulation & Numerical Analysis': {
+                title: 'Solving Steady State Heat Conduction Equation with Heat Generation In 2-D Space Using Numerical Method',
+                images: [
+                    'images/project-details/heat-sim-1.png', 
+                    'images/project-details/heat-sim-2.png', 
+                    'images/project-details/heat-sim-3.png',
+                    'images/project-details/heat-sim-4.png',
+                ],
+                details: {
+                    what: 'This project solves the steady-state heat conduction equation with heat generation in 2D using a numerical method. Implemented in MATLAB, it models temperature distribution across a material, analyzing factors like thermal conductivity and heat flow. The results help optimize heat transfer in engineering applications.',
+                    
+                    myContribution: `In this project, I utilized finite difference numerical methods to discretize the computational domain. Developed a MATLAB script that:
+                    <ul> 
+                        <li>Implemented heat transfer equations</li> 
+                        <li>Created a grid-based temperature calculation algorithm</li> 
+                        <li>Used matrix operations for efficient computation</li> 
+                        <li>Designed a graphical user interface (GUI) for user-friendly interaction</li> 
+                        <li>Generated color-mapped contour and 3D surface plots for visualization</li> 
+                    </ul>`,
+                    
+                    result: `Successfully created a robust thermal simulation model that:
+                    <ul> 
+                        <li>Accurately predicted temperature distributions</li> 
+                        <li>Demonstrated the impact of heat generation on thermal gradients</li> 
+                        <li>Provided insights into heat transfer mechanisms</li> 
+                        <li>Validated theoretical heat conduction principles</li> 
+                    </ul>`
+                },
+                tools: ['MATLAB', 'Numerical Methods', 'Heat Transfer Simulation']
+            },
+            // ... (rest of your project details object remains the same)
+            'Analog Circuit Design': {
+                title: 'An Analog Calculator (2-digit input) using Op-Amp',
+                images: [
+                    'images/project-details/analog-calc-1.png', 
+                    'images/project-details/analog-calc-2.png', 
+                    'images/project-details/analog-calc-3.png',
+                    'images/project-details/analog-calc-4.png',
+                    'images/project-details/analog-calc-5.png',
+                    'images/project-details/analog-calc-6.png',
+                    'images/project-details/analog-calc-7.png',
+                    'images/project-details/analog-calc-8.png',
+                    'images/project-details/analog-calc-9.png',
+                    'images/project-details/analog-calc-10.png',
+                    'images/project-details/analog-calc-11.png'
+                ],
+                details: {
+                    what: 'This project develops an Analog Calculator using Op-Amps to perform mathematical operations on both AC and DC signals. Utilizing fundamental op-amp configurations, the calculator executes summation, subtraction, multiplication, division, differentiation, integration, logarithmic, exponential, power, and root functions.',
+                   myContribution: 'Designed and implemented all calculation circuits in PSpice, ensuring optimal performance through:' +
+                         '<ul>' +
+                         '<li>Precision operational amplifiers</li>' +
+                         '<li>Careful circuit topology design</li>' +
+                         '<li>PSpice simulation for performance optimization</li>' +
+                         '<li>Analog computation logic implementation</li>' +
+                         '</ul>',
+                    result: 'Achieved a high-performance analog computing solution that:' +
+                            '<ul>' +
+                            '<li>Successfully performed all intended mathematical operations, except exponential and power calculations</li>' +
+                            '<li>Maintained high accuracy by minimizing op-amp offset current effects</li>' +
+                            '<li>Ensured correct outputs for AC differentiator and integrator at 1kHz, with adjustable capacitor values for other frequencies</li>' +
+                            '<li>Extended input capability beyond 2-digit calculations, handling up to 3-digit inputs</li>' +
+                            '<li>Highlighted the feasibility and advantages of analog computation in real-time applications</li>' +
+                            '</ul>'
+                },
+                tools: ['Op-Amps', 'PSpice', 'Analog Circuit Design']
+            },
+            'Motor Rewinding & Maintenance': {
+                title: 'Rewinding of a Single-Phase Induction Motor',
+                images: [
+                    'images/project-details/motor-rewind-1.png', 
+                    'images/project-details/motor-rewind-2.png', 
+                    'images/project-details/motor-rewind-3.png',
+                    'images/project-details/motor-rewind-4.png',
+                    'images/project-details/motor-rewind-5.png',
+                    'images/project-details/motor-rewind-6.png',
+                    'images/project-details/motor-rewind-7.png'
+                ],
+                details: {
+                    what: 'This project involves the rewinding of single-phase induction motors to restore performance, improve efficiency, and extend lifespan. It covers motor disassembly, precise coil placement, and optimal winding configurations using a step-by-step approach for reliable operation.',
+                   myContribution: 'Performed the complete rewinding process, including:' +
+                         '<ul>' +
+                         '<li>Insulation to ensure electrical safety and durability</li>' +
+                         '<li>Coil making with precise winding configurations</li>' +
+                         '<li>Coil insertion for optimal motor performance</li>' +
+                         '<li>Connection of windings for proper functionality</li>' +
+                         '<li>Application of varnish to enhance insulation and longevity</li>' +
+                         '<li>Reassembling of rotor and casing for structural integrity' +
+                         '<li>Testing to verify motor performance and efficiency</li>' +
+                         '</ul>',
+                    result: 'Successfully restored motor performance:' +
+                            '<ul>' +
+                            '<li>Improved motor efficiency</li>' +
+                            '<li>Extended motor operational lifespan</li>' +
+                            '<li>Demonstrated advanced motor maintenance skills</li>' +
+                            '<li>Validated theoretical motor design principles</li>' +
+                            '</ul>'
+                },
+                tools: ['Motor Rewinding', 'Electrical Diagnostics', 'Motor Maintenance']
+            },
+            'Renewable Energy Grid Modeling': {
+                title: 'Solar & Wind Turbine Based Power Plant Modelling and Effect of Overload Fault in IEEE 6 BUS System',
+                images: [
+                    'images/project-details/bus-fault-1.png', 
+                    'images/project-details/bus-fault-2.png', 
+                    'images/project-details/bus-fault-3.png',
+                    'images/project-details/bus-fault-4.png',
+                    'images/project-details/bus-fault-5.png',
+                    'images/project-details/bus-fault-6.png'
+                ],
+                details: {
+                    what: 'This project simulates the integration of solar and wind power into the IEEE 6 bus system, analyzing overload fault effects and developing mitigation strategies to enhance grid stability and efficiency.',
+                    myContribution: 'Developed the IEEE 6 Bus System Model, including:' +  
+                         '<ul>' +   
+                         '<li>Built the IEEE 6 Bus System in Simulink</li>' +  
+                         '<li>Conducted fault analysis in the conventional power system</li>' +  
+                         '<li>Compared fault results with relevant resources</li>' +  
+                         '</ul>',
+                    result: 'Achieved a comprehensive analysis of renewable energy integration in the IEEE 6 Bus System, including:' +  
+                        '<ul>' +  
+                        '<li>Successfully modeled solar and wind power integration using MATLAB and Simulink</li>' +  
+                        '<li>Evaluated system behavior under various fault conditions</li>' +  
+                        '<li>Assessed the impact of distributed generation on fault levels and protection mechanisms</li>' +  
+                        '<li>Compared fault responses of solar and wind energy sources</li>' +  
+                        '<li>Provided insights into system resilience and reliability under overload fault scenarios</li>' +  
+                        '</ul>', 
+                },
+                tools: ['MATLAB and Simulink', 'IEEE 6 Bus System', 'Fault analysis']
+            },
+            'Smart Greenhouse Management': {
+                title: 'EcoWatch: Smart Greenhouse Environment Management with Fire Safety',
+                images: [
+                    'images/project-details/greenhouse-1.png', 
+                    'images/project-details/greenhouse-2.png', 
+                    'images/project-details/greenhouse-3.png',
+                    'images/project-details/greenhouse-4.png',
+                    'images/project-details/greenhouse-5.png'
+                ],
+                details: {
+                    what: 'Developed an IoT-based system for smart greenhouse management and fire safety using Arduino, ESP8266, and sensors to monitor environmental conditions in real-time. The system enables automated control, remote data access via Thingspeak Cloud, and fire detection with mobile alerts for enhanced safety and efficiency.',
+                    myContribution: 'Contributed to the development and implementation of the system by:' +
+                                    '<ul>' +
+                                    '<li>Writing code for sensor reading, actuator control, and data transmission</li>' +
+                                    '<li>Assembling and configuring the Arduino UNO board and sensors</li>' +
+                                    '<li>Setting up initial hardware components for seamless integration</li>' +
+                                    '<li>Establishing communication with Thingspeak Cloud for real-time data monitoring</li>' +
+                                    '<li>Implementing algorithms for temperature, humidity, and soil moisture control</li>' +
+                                    '<li>Ensuring optimal growing conditions for plants through automated adjustments</li>' +
+                                    '</ul>',
+                    result: 'Achieved a successfully integration of IoT-based environmental monitoring and fire safety measures. The system demonstrated:' +  
+                        '<ul>' +  
+                        '<li>Automated real-time monitoring of temperature, humidity, and soil moisture.</li>' +  
+                        '<li>Optimized plant growth conditions through intelligent control algorithms.</li>' +  
+                        '<li>Enabled early fire detection and mitigation for improved safety.</li>' +  
+                        '<li>Established cloud-based data logging and remote monitoring</li>' +  
+                        '<li>Enhanced efficiency, sustainability, and resource management.</li>' +  
+                        '</ul>', 
+                },
+                tools: ['Arduino UNO', 'ESP8266','Sensors','Thingspeak Cloud']
+            },
+            'Biometric Authentication System': {
+                title: 'Biometric Authentication System for Classroom Management through Voice Recognition.',
+                images: [
+                    'images/project-details/biomet-1.png', 
+                    'images/project-details/biomet-2.png', 
+                    'images/project-details/biomet-3.png',
+                    'images/project-details/biomet-4.png',
+                    'images/project-details/biomet-5.png',
+                    'images/project-details/biomet-6.png'
+                ],
+                details: {
+                    what: 'This project develops a voice recognition-based biometric authentication system for classroom management, using MFCC for feature extraction and KNN for speaker classification. It aims to improve attendance tracking by replacing traditional methods with secure, efficient voice-based verification while ensuring data privacy and regulatory compliance.',
+                    myContribution: 'Contributed to the development and implementation of the project:' +
+                                    '<ul>' +
+                                    '<li>Actively participated in all phases of the project, with a specific focus on data collection and real-time testing.</li>' +
+                                    '<li>Collected voice data, selected appropriate data collection parameters, and ensured the quality and diversity of the voice samples.</li>' +
+                                    '<li>Conducted real-time testing of the biometric authentication system to evaluate its accuracy, efficiency, and performance in a classroom environment.</li>' +
+                                    '</ul>',
+                    result: 'Achieved successful execution of biometric authentication for classroom management.' +  
+                        '<ul>' +  
+                        '<li>Successfully demonstrated robust biometric authentication using advanced signal processing and machine learning.</li>' +  
+                        '<li>Achieved high accuracy in speaker recognition, ensuring secure attendance tracking.</li>' +  
+                        '<li>Set the stage for future enhancements, including accuracy improvements and exploration of alternative biometric modalities.</li>' +    
+                        '</ul>', 
+                },
+                tools: ['MATLAB', 'KNN (k-Nearest Neighbors) Algorithm', 'Mel-Frequency Cepstral Coefficients (MFCC)']
+            },
+            'Automated Railway Trafficking': {
+                title: 'Automated Railway Trafficking System',
+                images: [
+                    'images/project-details/train-1.png', 
+                    'images/project-details/train-2.png', 
+                    'images/project-details/train-3.png',
+                    'images/project-details/train-4.png',
+                    'images/project-details/train-5.png',
+                    'images/project-details/train-6.png',
+                ],
+                details: {
+                    what: 'The project designs an Automated Railway Trafficking System using a Finite State Machine (FSM) to optimize traffic light control based on real-time sensor data. It ensures safe and efficient train flow by dynamically adjusting light states (Red, Yellow, Green) for multiple railway lines. ',
+                    myContribution: 'Contributed to the development and implementation of the system by:' +
+                                    '<ul>' +
+                                    '<li>Designing the next state logic circuit for the Automated Railway Trafficking System in Proteus software.</li>' +
+                                    '<li>Implementing the logic circuit in hardware for real-time traffic light control.</li>' +
+                                    '<li>Ensuring correct state transitions and output generation based on sensor inputs.</li>' +
+                                    '</ul>',
+                    result: 'In the system:' +  
+                        '<ul>' +  
+                        '<li>Successfully implemented a 10-state Moore machine for the Automated Railway Trafficking System (ARTS).</li>' +  
+                        '<li>Verified precise state transitions based on sensor inputs, ensuring accurate traffic light control.</li>' +  
+                        '<li>Validated the effectiveness of the traffic light control mechanism, improving railway traffic management.</li>' +  
+                        '<li>Demonstrated that ARTS provides a robust, reliable, and scalable solution for railway traffic management.</li>' +  
+                        '<li>Confirmed the adaptability of the system for integration with various railway networks.</li>' +  
+                        '</ul>', 
+                },
+                tools: ['Proteus', 'Microcontroller', 'Sensors', 'Traffic Lights']
+            },
+            'Frequency Converter with Real-time Display': {
+                title: 'Frequency Converter with Real-time display and Tuning',
+                images: [
+                    'images/project-details/freq-1.png', 
+                    'images/project-details/freq-2.png', 
+                    'images/project-details/freq-3.png',
+                    'images/project-details/freq-4.png',
+                    'images/project-details/freq-5.png',
+                    'images/project-details/freq-6.png',
+                    'images/project-details/freq-7.png',
+                    'images/project-details/freq-8.png',
+                ],
+                details: {
+                    what: 'This project develops a cost-effective frequency converter that transforms 50 Hz AC to 60 Hz AC using a full-wave rectifier, half-bridge inverter, and smoothing filter. It also features real-time frequency tuning displayed on an LCD panel, providing a reliable solution for industrial and household applications requiring frequency adaptation.',
+                    myContribution: 'Contributed to the development and implementation of the system:' +
+                                    '<ul>' +
+                                    '<li>Designed and built the rectifier circuit for AC to DC conversion.</li>' +
+                                    '<li>Played a key role in troubleshooting inverter-related issues to ensure smooth operation.</li>' +
+                                    '<li>Actively participated in the trial-and-error phases during lab testing to address and resolve technical challenges.</li>' +
+                                    '</ul>',
+                    result: 'In the system:' +  
+                        '<ul>' +  
+                        '<li>Successfully developed a frequency converter capable of converting varying AC signals into stable, sinusoidal AC output.</li>' +  
+                        '<li>Achieved smooth AC conversion using a rectifier, smoothing filter, half-bridge inverter, and LC filter.</li>' +  
+                        '<li>Enabled precise output frequency tuning with a user-friendly potentiometer.</li>' +  
+                        '<li>Provided real-time frequency monitoring through an LCD display for convenient operation.</li>' +  
+                        '<li>Delivered a cost-effective and efficient solution suitable for industries requiring accurate frequency control.</li>' +  
+                        '</ul>', 
+                },
+                tools: ['Proteus', 'SG3524 IC', 'MOSFETs','LCD Display','Optocouplers','Oscilloscope']
+            },
+            
+            'Autonomous Fire Extinguishing Robot': {
+                title: 'Autonomous Fire Extinguishing Robot',
+                images: [
+                    'images/project-details/fire-1.png', 
+                    'images/project-details/fire-2.png', 
+                    'images/project-details/fire-3.png',
+                    'images/project-details/fire-4.png'
+                ],
+                details: {
+                    what: 'The "Autonomous Fire Extinguishing Robot" detects and extinguishes fires in a two-room environment. Using flame sensors, wireless communication, and autonomous navigation, it reaches the fire, confirms its presence, and activates a water pump to extinguish it, minimizing human intervention.',
+                    myContribution: 'Contributed to the development and implementation of the system:' +
+                                    '<ul>' +
+                                    '<li>Designed and integrated the servo mechanism for precise nozzle positioning.</li>' +
+                                    '<li>Implemented the water pump system to extinguish fires upon detection by the robots sensors.</li>' +
+                                    '<li>Ensured smooth operation of the pump and servo for efficient fire suppression.</li>' +
+                                    '</ul>',
+                    result: 'The "Automatic Fire Extinguishing Robot" demonstrated reliable performance in detecting and extinguishing fires. Key outcomes include:' +  
+                        '<ul>' +  
+                        '<li>Efficient communication and navigation for autonomous fire detection and suppression.</li>' +  
+                        '<li>Successful integration of flame sensors and a water pump system for effective fire mitigation.</li>' +  
+                        '<li>The robot proved capable of addressing fire emergencies in real-world household environments.</li>' +   
+                        '</ul>', 
+                },
+                tools: [ 'Arduino IDE', 'ESP32 and ESP8266 Wi-Fi modules', 'Flame sensors','Motors and Servos','Water pump','Bluetooth communication']
+            },
+        };
+
+        // Event listener for project clicks
+       // Event listener for project clicks
+document.addEventListener("DOMContentLoaded", function() {
+    // Check if device is mobile (using media query)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    
+    document.querySelectorAll('.work').forEach(work => {
+        if (isMobile) {
+            // Mobile behavior - two click pattern
+            work.addEventListener('click', function(e) {
+                const layer = this.querySelector('.layer');
+                
+                // If the layer is already active and the click is on the layer, open project details
+                if (layer.classList.contains('active') && e.target.closest('.layer')) {
+                    // Get project title and open project details
+                    const projectTitle = this.querySelector('.layer h3').textContent;
+                    openProjectDetails(projectTitle);
+                } 
+                // Otherwise toggle the layer visibility
+                else {
+                    // First deactivate all other layers
+                    document.querySelectorAll('.work .layer').forEach(otherLayer => {
+                        if (otherLayer !== layer) {
+                            otherLayer.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current layer
+                    layer.classList.toggle('active');
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+        } else {
+            // Desktop behavior - direct click to open details
+            work.addEventListener('click', function() {
+                const projectTitle = this.querySelector('.layer h3').textContent;
+                openProjectDetails(projectTitle);
+            });
+        }
+    });
+
+    // Function to open project details
+    function openProjectDetails(projectTitle) {
+        const project = projectDetails[projectTitle];
+        
+        if (project) {
+            const detailsContainer = document.querySelector('.project-details-content');
+            detailsContainer.innerHTML = `
+                <div class="project-header">
+                    <h2>${project.title}</h2>
+                    <div class="project-tools-tag">
+                        ${project.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                    </div>
+                </div>
+                
+                <div class="project-image-gallery">
+                    ${project.images.map((img, index) => `
+                        <div class="gallery-item ${index === 0 ? 'active' : ''}">
+                            <img src="${img}" alt="Project Image ${index + 1}">
+                        </div>
+                    `).join('')}
+                    <div class="gallery-nav">
+                        <button class="gallery-prev">&lt;</button>
+                        <button class="gallery-next">&gt;</button>
+                    </div>
+                </div>
+                
+                <div class="project-details-section">
+                    <div class="detail-block">
+                        <h3>What</h3>
+                        <p>${project.details.what}</p>
+                    </div>
+                    <div class="detail-block">
+                        <h3>My contribution</h3>
+                        ${project.details.myContribution}
+                    </div>
+                    <div class="detail-block">
+                        <h3>Result</h3>
+                        ${project.details.result}
+                    </div>
+                </div>
+            `;
+            
+            // Image gallery navigation
+            const galleryItems = detailsContainer.querySelectorAll('.gallery-item');
+            const prevBtn = detailsContainer.querySelector('.gallery-prev');
+            const nextBtn = detailsContainer.querySelector('.gallery-next');
+            let currentImageIndex = 0;
+
+            function updateGallery() {
+                galleryItems.forEach((item, index) => {
+                    item.classList.toggle('active', index === currentImageIndex);
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+                updateGallery();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+                updateGallery();
+            });
+            
+            document.getElementById('project-details-overlay').style.display = 'flex';
+        }
+    }
+
+    // Close project details
+    document.querySelector('.close-details').addEventListener('click', function() {
+        document.getElementById('project-details-overlay').style.display = 'none';
+    });
+
+    // Close when clicking outside the details
+    document.getElementById('project-details-overlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+});
+
+    // Reset click counters when clicking elsewhere
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.work')) {
+            document.querySelectorAll('.work .layer').forEach(layer => {
+                layer.classList.remove('active');
+            });
+        }
+    });
+
+        var sidemeu = document.getElementById("sidemenu");
+    
+        function openmenu() {
+            sidemeu.style.right = "0";
+        }
+    
+        function closemenu() {
+            sidemeu.style.right = "-200px";
+        }
+    </script>
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+</body>
+</html>

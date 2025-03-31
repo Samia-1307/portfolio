@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add this to ensure proper rendering -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Samia Hossain</title>
+    
+    <!-- Make sure CSS path is correct -->
+    <link rel="stylesheet" href="style2.css">
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e7aa8b513f.js" crossorigin="anonymous"></script>
+</head>
+<body class = "home">
+    <!-- Add a main container -->
+    <div class="main-container">
+        <div id="header">
+            <div class="container">
+                <nav>
+                    <!-- Verify image path -->
+                    <img src="images/logo2.png" class="logo" alt="Logo">
+                    <ul id="sidemenu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fas fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <div class="header-text">
+                    <p>Electrical & Electronics Engineering Student</p>
+                    <h1>Hi, I'm <span>Samia Hossain</span> <br>Exploring the World of Electronics</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>Copyright © Samia.</p>
+    </div>
+
+    <!-- Add basic JavaScript at bottom -->
+    <script>
+        // Mobile menu functionality
+        var sidemenu = document.getElementById("sidemenu");
+        
+        function openmenu() {
+    document.getElementById("sidemenu").style.right = "0";
+}
+
+function closemenu() {
+    document.getElementById("sidemenu").style.right = "-200px";
+}
+    </script>
+</body>
+</html>

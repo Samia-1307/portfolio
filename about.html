@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Samia Hossain</title>
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://kit.fontawesome.com/e7aa8b513f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo2.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <i class="fas fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
+    </div>
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/user.png" alt="Samia Hossain">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>I'm Samia Hossain, a Bangladeshi Electrical and Electronics Engineering student who is extremely interested in the world of electronics. I enjoy figuring out how circuits operate, experimenting with embedded systems, and bringing creative ideas to life through hardware development.</p>
+                    
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills', event)">Skills</p>
+<p class="tab-links" onclick="opentab('experience', event)">Experience</p>
+<p class="tab-links" onclick="opentab('education', event)">Education</p>
+                    </div>
+                    
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Programming</span><br>C, C++, Verilog</li>
+                            <li><span>Embedded Systems</span><br>Microcontrollers, sensors, real-time applications</li>
+                            <li><span>Simulation & Signal Processing</span><br>PSpice, MATLAB, DSP</li>
+                            <li><span>Power Electronics</span><br>Converters, PSAF</li>
+                            <li><span>Digital Circuit Design</span><br>Logic gates, Verilog</li>
+                            <li><span>PCB Design</span><br>Proteus</li>
+                            <li><span>Machine Learning</span><br>Beginner, exploring applications</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Collaborative Engineering Projects</span><br>
+                                Gained hands-on experience in group-based projects spanning simulation, embedded systems, power electronics, automation, and control systems.
+                                <li><span>Simulation & Numerical Analysis</span><br>
+                                    Applied computational techniques for engineering simulations, including numerical methods for heat transfer analysis and grid fault modeling. Utilized MATLAB and Simulink to analyze complex system behaviors.
+                                </li>
+                            
+                                <li><span>Embedded Systems & Automation</span><br>
+                                    Designed and implemented embedded solutions using Arduino, ESP8266, and microcontrollers for applications in automation, fire safety, and IoT-based monitoring systems.
+                                </li>
+                            
+                                <li><span>Power Electronics & Control</span><br>
+                                    Worked on AC-DC/DC-DC converters, frequency converters, and renewable energy grid integration. Simulated and analyzed power system behavior under various fault conditions.
+                                </li>
+                            
+                                <li><span>Hardware Implementation & PCB Design</span><br>
+                                    Developed and tested circuit designs using Proteus and PSpice. Built and optimized hardware systems, including analog computing circuits, motor rewinding, and digital control systems.
+                                </li>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>2021 - Present</span><br>Pursuing an undergraduate degree in Electrical and Electronics Engineering (EEE) in BUET.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>Copyright © Samia.</p>
+    </div>
+
+    <script>
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+    
+        function opentab(tabname, event) { // Add event parameter
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    for (let tablink of tablinks) {
+        tablink.classList.remove("active-link");
+    }
+    for (let tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+    }
+    
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+}
+    </script>
+
+    <script>
+        var sidemeu = document.getElementById("sidemenu");
+    
+        function openmenu() {
+            sidemeu.style.right = "0";
+        }
+    
+        function closemenu() {
+            sidemeu.style.right = "-200px";
+        }
+    </script>
+
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+    // Add visible class to all sections immediately
+    document.getElementById("about").classList.add("visible");
+    document.getElementById("portfolio").classList.add("visible");
+    document.getElementById("contact").classList.add("visible");
+});
+    </script>
+    
+</body>
+</html>

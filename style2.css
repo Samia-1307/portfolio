@@ -1,0 +1,1110 @@
+#header, #about, #portfolio, #contact {
+    opacity: 1 !important;  /* Override the opacity:0 rule */
+    transform: none !important; /* Prevent any transforms from hiding content */
+    display: block !important; /* Ensure the elements are displayed */
+}
+
+/* Make sure header is visible and properly positioned */
+#header {
+    width: 100% !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Fix work items visibility */
+.work.visible {
+    display: block !important;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+#header {
+    flex: 0 0 auto; /* Header doesn't grow or shrink */
+}
+
+#about, #portfolio, #contact {
+    flex: 1 0 auto; /* Main content grows to fill space */
+    padding: 80px 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: block;
+}
+
+.main-container {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Make sure header is visible */
+#header {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background: #000000;
+    color: #fff;
+}
+.home #header {
+    width: 100%;
+    height: 100vh;
+    background-image: url(images/background4.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 50%
+}
+.container {
+    padding: 10px 10%;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.logo {
+    width: 200px;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #5c92db;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+.header-text {
+    margin-top: 10%;
+    font-size: 30px;
+}
+
+.header-text h1 {
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.header-text h1 span {
+    color: #5c92db;
+}
+/* ----------about---------- */
+
+
+#about .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start; /* This aligns items at the top */
+}
+
+/* If needed, you can also remove any top margins from the first elements */
+#about .about-col-1 img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 0; /* Ensure no top margin on the image */
+}
+
+#about .sub-title {
+    font-size: 60px;
+    font-weight: 600;
+    color: #fff;
+    margin-top: 0; /* Remove any top margin from the title */
+}
+
+#about .about-col-1 { /* Space between #about and .about-col-1 */
+    flex-basis: 35%;
+}
+
+
+
+#about .about-col-2 { /* Space between #about and .about-col-2 */
+    flex-basis: 60%;
+}
+
+#about .tab-titles { /* Fix selector */
+    display: flex;
+    margin: 20px 0 40px;
+}
+
+#about .tab-links { /* Fix selector */
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    padding: 10px 20px;
+    background-color: #2a2626; /* Default background */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#about .tab-links:hover { /* Fix selector */
+    background-color: #5c92db;
+    color: #fff;
+}
+
+#about .tab-links.active-link { /* Fix selector */
+    background-color: #5c92db;
+    color: #fff;
+}
+
+#about .tab-links::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #5c92db;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    transition: 0.5s;
+}
+
+#about .tab-links.active-link::after {
+    width: 50%;
+}
+
+#about .tab-contents ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+#about .tab-contents ul li span {
+    color: #5c92db;
+    font-size: 14px;
+}
+
+#about .tab-contents {
+    display: none;
+}
+
+#about .tab-contents.active-tab {
+    display: block;
+}
+
+/* ----------portfolio---------- */
+
+#portfolio {
+    padding: 50px 0;
+}
+.work-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.work {
+    width: calc(50% - 10px); /* Adjust for two columns */
+    display: none; /* Hide all initially */
+    position: relative; /* Needed for .layer absolute positioning */
+    overflow: hidden; /* Ensures no overflow issues */
+}
+
+.work.visible {
+    display: block;
+}
+
+.layer {
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(rgba(0,0,0,0.6),#5c92db);
+    border-radius: 10px;
+    position: absolute; /* Ensures it overlays the image */
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    font-size: 14px;
+    transition: height 0.5s ease-in-out;
+}
+
+.layer h3 {
+    font-weight: 1000;
+    margin-bottom: 2px;
+    color: #fff; /* Ensure visibility */
+}
+.layer p {
+    margin-top: 2px; /* Reduce space above the paragraph */
+}
+
+.layer a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #ff004f;
+    text-decoration: none;
+    font-size: 15px;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.work-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusts number of columns automatically */
+    gap: 20px;
+}
+
+.work {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Adjust to match your image dimensions */
+    overflow: hidden;
+}
+
+.work img {
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures consistent size while keeping the aspect ratio */
+    border-radius: 10px;
+    display: block;
+}
+.btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    background: #5c92db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background: #3a6fb0;
+}
+.work.hidden {
+    display: none; /* Ensure hidden works are actually hidden */
+}
+.work.visible {
+    display: block; /* Ensure they appear when 'visible' class is added */
+}
+.work:hover img {
+    transform: scale(1.1);
+}
+
+.work:hover .layer {
+    height: 100%;
+}
+/* ----------contact---------- */
+
+.contact-left {
+    flex-basis: 35%;
+}
+
+.contact-right {
+    flex-basis: 60%;
+}
+
+.contact-left p {
+    margin-top: 30px;
+}
+
+.contact-left p i {
+    color: #5c92db;
+    margin-right: 15px;
+    font-size: 25px;
+}
+.social-icons {
+    margin-top: 30px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    font-size: 30px;
+    margin-right: 15px;
+    color: #ababab;
+    display: inline-block;
+    transform: transform 0.5s;
+}
+.social-icons a:hover {
+    color: #5c92db;
+    transform: translateY(-5px);
+}
+
+.btn.btn2 {
+    display: inline-block;
+    background: #5c92db;
+}
+.contact-right form {
+    width: 100%;
+}
+form input, form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+
+form .btn2 {
+    padding: 14px 60px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.copyright {
+    width: 100%;
+    text-align: center;
+    padding: 25px 0;
+    background: #262626;
+    font-weight: 300;
+    margin-top: 20px;
+}
+.project-details-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.project-details-container {
+    background: #1a1a1a;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-details {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #5c92db;
+    color: white;
+    border: none;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.close-details:hover {
+    background: #3a6fb0;
+}
+
+.project-details-content h2 {
+    color: #5c92db;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.project-images {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.project-images img {
+    max-width: 250px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.project-images img:hover {
+    transform: scale(1.05);
+}
+
+.project-details-content p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ababab;
+}
+.project-tools h3 { 
+    color: #5c92db; 
+    margin-bottom: 10px; 
+  } 
+  
+  .project-tools ul { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+  
+  .project-tools ul li { 
+    background: #262626; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    color: #ababab;
+    width: max-content;
+    max-width: 100%;
+  }
+/*-------------------------css for small screens---------------------------------*/
+nav .fas {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    body.home #header { 
+        background-image: url(images/phone-background.png); 
+        background-position: right; 
+        background-repeat: no-repeat; 
+        background-size: contain; 
+        width: 100%; 
+        height: 100vh; /* Ensure full viewport height */
+        position: relative; /* Allows absolute positioning inside */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        text-align: left; /* Centers the text */
+        margin-left: -50px;
+        margin-top: 60px;
+    }
+
+    .header-text p {
+        margin-top: 0; /* Remove negative margins */
+    }
+
+    .header-text h1 {
+        font-size: 20px;
+        position: relative;
+        top: 0;
+    }
+    nav .fas {
+        display: block;
+        font-size: 25px;
+        margin-top: -30px;
+    }
+    nav ul {
+        background: #5c92db;
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 180px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin: 25px;
+    }
+    
+    nav ul .fas {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+    .sub-title {
+        font-size: 30px;
+    }
+    
+    #about .about-col-1, .about-col-2 {
+        flex-basis: 100%;
+    }
+    
+    #about .about-col-1 {
+        margin-bottom: 30px;
+        margin-top: -100px;
+    
+    }
+    
+    #about .about-col-2 {
+        font-size: 14px;
+    }
+    
+    #about .tab-links {
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    .tab-contents ul {
+        padding-left: 0;  /* Remove default padding */
+        margin-left: -20px; /* Shift text to the left */
+        padding-right: 6px;
+        
+    }
+    .contact-left, .contact-right {
+        flex-basis: 100%;
+    }
+    
+    .copyright {
+        font-size: 14px;
+    }
+    .work-list {
+        grid-template-columns: repeat(1, 1fr); /* Show 1 image per row on small screens */
+    }
+    .work img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .work .layer {
+        transform: translateY(100%);
+        transition: transform 0.5s;
+    }
+    
+    .work .layer.active {
+        transform: translateY(0);
+    }
+    
+    /* Reset hover effects on mobile */
+    .work:hover img {
+        transform: none;
+    }
+    
+    .work:hover .layer {
+        transform: none;
+    }
+    
+    /* Make sure layers are visible when active */
+    .work .layer.active {
+        height: 100%;
+        opacity: 1;
+        overflow: hidden;
+    }
+    
+    /* Style for the "tap for details" prompt */
+    .work .layer:after {
+        content: "Tap again for details";
+        display: block;
+        font-size: 0.8rem;
+        margin-top: 10px;
+        opacity: 0.8;
+    }
+    .sub-title2 {
+        margin-top: -70px !important;
+        font-size: 40px;
+    }
+    
+    
+}
+#msg {
+    color: #61b752;
+    margin-top: 20px;
+    display: block;
+}
+@media only screen and (max-width: 600px) {
+    .project-details-container {
+        padding: 15px;
+        margin: 0 10px;
+    }
+
+    .project-images {
+        flex-direction: column;
+    }
+
+    .project-images img {
+        max-width: 100%;
+        height: auto;
+    }
+    .project-tools ul {
+        justify-content: flex-start;
+      }
+      
+      .project-tools ul li {
+        flex-basis: calc(50% - 10px);
+        box-sizing: border-box;
+      }
+}
+.project-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.project-details-container {
+    background: #1e1e1e;
+    max-width: 1000px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 2px solid #5c92db;
+}
+
+.close-details {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: #5c92db;
+    border: 2px solid #5c92db;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.close-details:hover {
+    background: #5c92db;
+    color: white;
+}
+
+.project-header {
+    padding: 30px;
+    background: #252525;
+    border-bottom: 2px solid #5c92db;
+}
+
+.project-header h2 {
+    margin-bottom: 10px;
+  }
+  
+  .project-tools-tag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+  
+  .tool-tag {
+    background: #3b82f6; /* Blue background */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #ffffff; /* White text for contrast */
+    display: inline-block;
+    margin-bottom: 5px;
+    /* These properties ensure the box effect is maintained */
+    box-sizing: border-box;
+    /* Removed the box-shadow since the background is now blue */
+  }
+  
+  
+
+.project-image-gallery {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.gallery-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-item.active {
+    opacity: 1;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.gallery-prev, .gallery-next {
+    background: rgba(92, 146, 219, 0.7);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex; /* Ensure proper rendering */
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-prev:hover, .gallery-next:hover {
+    background: #5c92db;
+}
+
+.project-details-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px;
+    background: #1a1a1a;
+}
+
+.detail-block {
+    background: #252525;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #5c92db;
+}
+
+.detail-block h3 {
+    color: #5c92db;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.detail-block p, .detail-block ul {
+    color: #ababab;
+    line-height: 1.6;
+}
+
+.detail-block ul {
+    padding-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .project-details-section {
+        grid-template-columns: 1fr;
+    }
+
+    .project-image-gallery {
+        height: 300px;
+    }
+
+    .project-header h2 {
+        font-size: 24px;
+    }
+    .project-tools ul li {
+        flex: 0 0 calc((100% - 10px) / 2);
+        max-width: calc((100% - 10px) / 2);
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+}
+
+@media only screen and (max-width: 480px) {
+    .project-details-container {
+        margin: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    .project-image-gallery {
+        height: 200px;
+    }
+}
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid #5c92db;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Smooth Scroll and Performance */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Section Transitions */
+#header, #about, #portfolio, #contact {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+#header.visible, #about.visible, #portfolio.visible, #contact.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Refined Hover Effects */
+.work {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(92, 146, 219, 0.2);
+}
+
+/* Enhanced Button Styles */
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+/* Advanced Form Styling */
+form input, form textarea {
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #5c92db;
+    box-shadow: 0 0 10px rgba(92, 146, 219, 0.3);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    :root {
+        --base-font-size: 14px;
+    }
+    
+    body {
+        font-size: var(--base-font-size);
+    }
+}
+/* Add this to your existing CSS */
+nav ul li a.active {
+    color: #f7f9fb;
+    position: relative;
+}
+
+nav ul li a.active::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #5c92db;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    border: 5px solid #5c92db;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@media only screen and (max-width: 600px) {
+    #header {
+        width: 100% !important; /* Override the 130% width which causes overflow */
+        background-size: contain;
+    }
+    
+    .header-text p {
+        margin-top: 0; /* Fix negative margins */
+        margin-left: 0;
+    }
+    
+    .header-text h1 {
+        margin-left: 0;
+    }
+    @media (max-width: 600px) {
+        .project-tools ul li {
+            flex: 1 1 100%; /* On smaller screens, make each item take up the full width */
+        }
+    }
+}
+
+/* Fix preloader to ensure it doesn't stay visible forever */
+#preloader {
+    display: none; /* Hide by default once page loads */
+}
+@media (max-width: 768px) {
+    .project-tools-tag {
+      width: 100%;
+    }
+    
+    .tool-tag {
+      flex-grow: 0;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+  }
+  @media (max-width: 768px) {
+    /* Reduce the font size of the "Contact Me" heading */
+    .contact-left .sub-title {
+        font-size: 35px; /* Adjust as needed */
+        margin-top: -90px;
+    }
+
+    /* Reduce input and textarea width */
+    .contact-right input,
+    .contact-right textarea {
+        width: 90%; /* Adjust width for smaller screens */
+        font-size: 14px; /* Reduce text size */
+        padding: 8px; /* Adjust padding for smaller height */
+    }
+
+    /* Reduce button size */
+    .contact-right .btn {
+        font-size: 14px; /* Adjust button text size */
+        padding: 8px 15px; /* Adjust button padding */
+    }
+
+    /* Adjust social icons size */
+    .social-icons a {
+        font-size: 35px; /* Reduce icon size */
+    }
+    .contact-left p {
+        font-size: 18px; /* Adjust the size as needed */
+        font-weight: bold; /* Make it more prominent */
+    }
+    
+    .contact-left p i {
+        font-size: 22px; /* Increase the icon size */
+        margin-right: 8px; /* Add spacing between icon and text */
+        color: #3b82f6; /* Optional: Change icon color to blue */
+    }
+}
+
+
