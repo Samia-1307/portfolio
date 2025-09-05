@@ -1,184 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Samia Hossain</title>
-    <link rel="stylesheet" href="style2.css">
-    <script src="https://kit.fontawesome.com/e7aa8b513f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="project-details.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <style>
-        /* Override problematic CSS rules */
-        #header, #about, #portfolio, #contact {
-            opacity: 1 !important;
-            transform: none !important;
-        }
-        
-        /* Ensure proper display of work items */
-        .work.visible {
-            display: block !important;
-        }
-        
-        /* Fix header visibility */
-        #header {
-            display: block !important;
-        }
-    </style>
-</head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Samia Hossain (Categorized)</title>
+  <link rel="stylesheet" href="style2.css" />
+  <script src="https://kit.fontawesome.com/e7aa8b513f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="project-details.css" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  
+<style>
+  #header, #about, #portfolio, #contact { 
+    opacity: 1 !important; 
+    transform: none !important; 
+  }
+  .work.visible { display: block !important; }
+  #header { display: block !important; }
+
+  /* Section headings closer */
+  .term-section { margin-top: 1rem !important; }
+  .term-heading { display:flex; align-items:center; gap:.5rem; margin-bottom:0.5rem !important; }
+  .term-heading h2 { font-size: 1.5rem; margin: 0; }
+  .term-badge { font-size:.85rem; background:#f1f1f1; padding:.2rem .5rem; border-radius:999px; }
+
+  .project-index {
+    position:absolute; top:8px; left:8px;
+    background:rgba(0,0,0,.7); color:#fff;
+    padding:.15rem .45rem; border-radius:6px;
+    font-size:.8rem; z-index:2;
+  }
+
+  #toggle-btn { display:none; }
+
+  /* --- Category order --- */
+  #portfolio .container { display:flex; flex-direction:column; gap:1rem !important; }
+  #portfolio .container > h1 { order:-10; }
+  #y4t1 { order:-5; }
+  #y3t2 { order:-4; }
+  #y3t1 { order:-3; }
+  #y2t2 { order:-2; }
+  #y2t1 { order:-1; }
+
+  /* === Project cards & thumbnails === */
+  .work {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .work img {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: contain;
+    background: #fff;
+    display: block;
+  }
+
+  /* Overlay inside each card */
+  .work .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;   /* match thumbnail */
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;             /* hidden by default */
+    pointer-events: none;   /* not clickable */
+    transition: opacity 0.3s ease;
+  }
+  .work:hover .layer {      /* show on hover (desktop) */
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .work .layer.active {     /* show when JS toggles .active (mobile) */
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* === Modal overlay === */
+ #project-details-overlay,
+.project-details-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  display: none;              /* <-- no !important here */
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0,0,0,0.7) !important;
+  z-index: 9999 !important;
+  padding: 24px !important;
+}
+#project-details-overlay .project-details-container {
+  background: #000;             /* black background */
+  color: #fff;                  /* make text readable on black */
+  border-radius: 12px;
+  padding: 1rem;
+  width: min(1000px,95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+  body.modal-open { overflow:hidden !important; }
+
+  /* Overlay gallery images */
+  #project-details-overlay .project-details-content .project-image-gallery .gallery-item,
+  #project-details-overlay .project-details-content .project-image-gallery .gallery-item img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 75vh !important;
+    object-fit: contain !important;
+    background: transparent !important;
+  }
+  /* Center and black background for images in the project details overlay */
+#project-details-overlay .project-image-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;              /* black background */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#project-details-overlay .project-image-gallery .gallery-item {
+  display: none;                 /* only active one shows */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#project-details-overlay .project-image-gallery .gallery-item.active {
+  display: flex;                 /* center the active image */
+}
+
+#project-details-overlay .project-image-gallery img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  margin: 0 auto;                /* center horizontally */
+  display: block;
+}
+.term-heading {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 0.75rem !important;
+  border-left: 6px solid #ff3b3b;  /* bold accent bar */
+  padding-left: 0.75rem;
+}
+
+.term-heading h2 {
+  font-size: 1.4rem;                /* larger */
+  font-weight: 700;               /* bolder */
+  text-transform: uppercase;      /* more dramatic presence */
+  letter-spacing: 1px;
+  color: #5c92db;                    /* dark by default */
+}
+
+.term-heading h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3b3b, #ff8800);
+  margin-top: 6px;
+  border-radius: 2px;
+}
+</style>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
-                <img src="images/logo2.png" class="logo">
-                <ul id="sidemenu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <i class="fas fa-times" onclick="closemenu()"></i>
-                </ul>
-                <i class="fas fa-bars" onclick="openmenu()"></i>
-            </nav>
-        </div>
+  <div id="header">
+    <div class="container">
+      <nav>
+        <img src="images/logo2.png" class="logo" />
+        <ul id="sidemenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <i class="fas fa-times" onclick="closemenu()"></i>
+        </ul>
+        <i class="fas fa-bars" onclick="openmenu()"></i>
+      </nav>
     </div>
+  </div>
 
-    <div id="portfolio" class="visible">
-        <div class="container">
-            <h1 class="sub-title2">Team-Based Projects</h1>
-            <div class="work-list">
-                <div class="work visible">
-                    <img src="images/work-9.png">
-                    <div class="layer">
-                        <h3>Autonomous Fire Extinguishing Robot</h3>
-                        <p>Built a robot with flame sensors, ESP32/ESP8266, and Arduino-based control for autonomous fire detection and extinguishing.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work visible">
-                    <img src="images/work-8.png">
-                    <div class="layer">
-                        <h3>Frequency Converter with Real-time Display</h3>
-                        <p>Designed a 50 Hz to 60 Hz frequency converter with real-time frequency monitoring, utilizing a half-bridge inverter and SG3524 IC.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work visible">
-                    <img src="images/work-7.png">
-                    <div class="layer">
-                        <h3>Automated Railway Trafficking</h3>
-                        <p>Developed an FSM-based railway traffic light control system, tested via Proteus simulation and hardware implementation.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work visible">
-                    <img src="images/work-6.png">
-                    <div class="layer">
-                        <h3>Biometric Authentication System</h3>
-                        <p>Implemented a voice-based classroom authentication system using MFCC and KNN in MATLAB, enhancing security and access control.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <!-- Hidden projects initially -->
-                <div class="work hidden">
-                    <img src="images/work-5.png">
-                    <div class="layer">
-                        <h3>Smart Greenhouse Management</h3>
-                        <p>Designed an IoT-based system for real-time greenhouse monitoring and fire detection using Arduino UNO, ESP8266, and cloud data processing.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work hidden">
-                    <img src="images/work-4.png">
-                    <div class="layer">
-                        <h3>Renewable Energy Grid Modeling</h3>
-                        <p>Developed a MATLAB/Simulink model analyzing overload fault scenarios (LLLG, line-to-line) in IEEE 6 BUS systems with solar and wind energy integration.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work hidden">
-                    <img src="images/work-3.png">
-                    <div class="layer">
-                        <h3>Motor Rewinding & Maintenance</h3>
-                        <p>Rewound a single-phase induction motor to restore performance, following a systematic rewiring approach.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work hidden">
-                    <img src="images/work-2.png">
-                    <div class="layer">
-                        <h3>Analog Circuit Design</h3>
-                        <p>Designed a 2-digit input analog calculator using op-amps, simulated in PSpice to balance speed and accuracy in analog computation.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work hidden">
-                    <img src="images/work-1.png">
-                    <div class="layer">
-                        <h3>Simulation & Numerical Analysis</h3>
-                        <p>Simulated 2D steady-state heat conduction with heat generation using MATLAB, applying numerical methods to analyze temperature distribution.</p>
-                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
-                    </div>
-                </div>
+  <div id="portfolio" class="visible">
+    <div class="container">
+      <h1 class="sub-title2">Team-Based Projects</h1>
+
+      <!-- Order changed: recent terms first -->
+
+      <!-- Year 4 · Term 1 -->
+      <section class="term-section" id="y4t1">
+        <div class="term-heading">
+          <h2>Year 4 · Term 1</h2>
+        </div>
+        <div class="work-list">
+          <!-- Project 10 -->
+          <div class="work visible" data-project="Smart Bangla Notice Board with Real-Time Calendar & Clock">
+            <img src="images/work-10.png" alt="Smart Bangla Notice Board" />
+            <div class="layer">
+              <h3>Smart Bangla Notice Board with Real-Time Calendar & Clock</h3>
+              <p>Developed an IoT-enabled Bangla digital notice board using ESP8266, LED dot matrices, and web interface for real-time clock, calendar, and remote notice updates.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
             </div>
-            <button class="btn" id="toggle-btn">See More</button>
-        </div>
-    </div>
+          </div>
 
-    <div id="project-details-overlay" class="project-details-overlay">
-        <div class="project-details-container">
-            <button class="close-details">&times;</button>
-            <div class="project-details-content">
-                <!-- Project details will be dynamically inserted here -->
+          <!-- Project 11 -->
+          <div class="work visible" data-project="Class-A RF Power Amplifier for GSM 900 MHz">
+            <img src="images/work-11.png" alt="Class-A RF Power Amplifier" />
+            <div class="layer">
+              <h3>Class-A RF Power Amplifier for GSM 900 MHz</h3>
+              <p>Designed and simulated a Class-A RF power amplifier in Cadence Virtuoso with common-emitter topology for GSM applications.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
             </div>
+          </div>
         </div>
+      </section>
+
+      <!-- Year 3 · Term 2 -->
+      <section class="term-section" id="y3t2">
+        <div class="term-heading">
+          <h2>Year 3 · Term 2</h2>
+        </div>
+        <div class="work-list">
+          <!-- Projects 7–9 -->
+          <div class="work visible" data-project="Automated Railway Trafficking">
+            <img src="images/work-7.png" alt="Automated Railway Trafficking" />
+            <div class="layer">
+              <h3>Automated Railway Trafficking</h3>
+              <p>Developed an FSM-based railway traffic light control system, tested via Proteus simulation and hardware implementation.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="work visible" data-project="Frequency Converter with Real-time Display">
+            <img src="images/work-8.png" alt="Frequency Converter" />
+            <div class="layer">
+              <h3>Frequency Converter with Real-time Display</h3>
+              <p>Designed a 50 Hz to 60 Hz frequency converter with real-time frequency monitoring, utilizing a half-bridge inverter and SG3524 IC.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="work visible" data-project="Autonomous Fire Extinguishing Robot">
+            <img src="images/work-9.png" alt="Autonomous Fire Extinguishing Robot" />
+            <div class="layer">
+              <h3>Autonomous Fire Extinguishing Robot</h3>
+              <p>Built a robot with flame sensors, ESP32/ESP8266, and Arduino-based control for autonomous fire detection and extinguishing.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Year 3 · Term 1 -->
+      <section class="term-section" id="y3t1">
+        <div class="term-heading">
+          <h2>Year 3 · Term 1</h2>
+        </div>
+        <div class="work-list">
+          <!-- Projects 4–6 -->
+          <div class="work visible" data-project="Renewable Energy Grid Modeling">
+            <img src="images/work-4.png" alt="Renewable Energy Grid Modeling" />
+            <div class="layer">
+              <h3>Renewable Energy Grid Modeling</h3>
+              <p>Developed a MATLAB/Simulink model analyzing overload fault scenarios (LLLG, line-to-line) in IEEE 6 BUS systems with solar and wind energy integration.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="work visible" data-project="Smart Greenhouse Management">
+            <img src="images/work-5.png" alt="Smart Greenhouse Management" />
+            <div class="layer">
+              <h3>Smart Greenhouse Management</h3>
+              <p>Designed an IoT-based system for real-time greenhouse monitoring and fire detection using Arduino UNO, ESP8266, and cloud data processing.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="work visible" data-project="Biometric Authentication System">
+            <img src="images/work-6.png" alt="Biometric Authentication System" />
+            <div class="layer">
+              <h3>Biometric Authentication System</h3>
+              <p>Implemented a voice-based classroom authentication system using MFCC and KNN in MATLAB, enhancing security and access control.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Year 2 · Term 2 -->
+      <section class="term-section" id="y2t2">
+        <div class="term-heading">
+          <h2>Year 2 · Term 2</h2>
+        </div>
+        <div class="work-list">
+          <!-- Projects 2–3 -->
+          <div class="work visible" data-project="Analog Circuit Design">
+            <img src="images/work-2.png" alt="Analog Circuit Design" />
+            <div class="layer">
+              <h3>Analog Circuit Design</h3>
+              <p>Designed a 2-digit input analog calculator using op-amps, simulated in PSpice to balance speed and accuracy in analog computation.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="work visible" data-project="Motor Rewinding & Maintenance">
+            <img src="images/work-3.png" alt="Motor Rewinding & Maintenance" />
+            <div class="layer">
+              <h3>Motor Rewinding & Maintenance</h3>
+              <p>Rewound a single-phase induction motor to restore performance, following a systematic rewiring approach.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Year 2 · Term 1 -->
+      <section class="term-section" id="y2t1">
+        <div class="term-heading">
+          <h2>Year 2 · Term 1</h2>
+        </div>
+        <div class="work-list">
+          <!-- Project 1 -->
+          <div class="work visible" data-project="Simulation & Numerical Analysis">
+            <img src="images/work-1.png" alt="Simulation & Numerical Analysis" />
+            <div class="layer">
+              <h3>Simulation & Numerical Analysis</h3>
+              <p>Simulated 2D steady-state heat conduction with heat generation using MATLAB, applying numerical methods to analyze temperature distribution.</p>
+              <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
+  </div>
 
-    <script>
-        // Wait for DOM to be fully loaded
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log("DOM loaded");
+  <div id="project-details-overlay" class="project-details-overlay">
+    <div class="project-details-container">
+      <button class="close-details">&times;</button>
+      <div class="project-details-content"></div>
+    </div>
+  </div>
+
+  <script>
+    // Wait for DOM to be fully loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM loaded");
+    
+    // Handle the preloader
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+    
             
-            // Handle the preloader
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.display = 'none';
-            }
-            
-            // Handle the work items visibility
-            const works = document.querySelectorAll(".work");
-            const toggleBtn = document.getElementById("toggle-btn");
-            let expanded = false;
-
-            function updateVisibility() {
-                console.log("Updating visibility, expanded:", expanded);
-                works.forEach((work, index) => {
-                    if (index < 4 || expanded) {
-                        work.classList.add("visible");
-                        work.classList.remove("hidden");
-                    } else {
-                        work.classList.add("hidden");
-                        work.classList.remove("visible");
-                    }
-                });
-
-                toggleBtn.textContent = expanded ? "See Less" : "See More";
-            }
-
-            if (toggleBtn) {
-                toggleBtn.addEventListener("click", function () {
-                    console.log("Toggle button clicked");
-                    expanded = !expanded;
-                    updateVisibility();
-                });
-            }
-
-            updateVisibility();
-        });
-
-        // Expanded project details with What,myContribution, Result structure
-        const projectDetails = {
+    const projectDetails = {
             'Simulation & Numerical Analysis': {
                 title: 'Solving Steady State Heat Conduction Equation with Heat Generation In 2-D Space Using Numerical Method',
                 images: [
@@ -451,152 +633,216 @@
                 },
                 tools: [ 'Arduino IDE', 'ESP32 and ESP8266 Wi-Fi modules', 'Flame sensors','Motors and Servos','Water pump','Bluetooth communication']
             },
+            'Smart Bangla Notice Board with Real-Time Calendar & Clock': {
+    title: 'IoT-Based Smart Bangla Notice Board with Real-Time Calendar & Clock',
+    images: [
+        'images/project-details/clock1.png', 
+        'images/project-details/clock1.2.png', 
+        'images/project-details/clock2.png',
+        'images/project-details/clock3.png'
+    ],
+    details: {
+        what: 'The "IoT-Based Smart Bangla Notice Board with Real-Time Calendar & Clock" is a digital display system that shows Bangla notices, time, and calendar on three LED panels. Using an ESP8266 microcontroller, Wi-Fi, and NTP synchronization, it ensures accurate real-time updates. Notices can be updated remotely via a web interface, making it a cost-effective and culturally relevant communication tool for schools, offices, and public spaces.',
+        myContribution: 'I contributed to the following aspects of the project:' +
+                        '<ul>' +
+                        '<li>Worked on circuit building and hardware integration.</li>' +
+                        '<li>Developed and coded the display for clock, calendar, and scrolling notice board.</li>' +
+                        '<li>Worked on the web page interface for updating and controlling notices.</li>' +
+                        '</ul>',
+        result: 'The project was successfully implemented and demonstrated in real time. Key outcomes include:' +  
+                '<ul>' +  
+                '<li>Accurate Bangla display of time, date, and notices on three LED panels.</li>' +  
+                '<li>Reliable synchronization with internet-based NTP servers for real-time accuracy.</li>' +  
+                '<li>Web-based remote control for updating notices dynamically.</li>' +   
+                '<li>A cost-effective and culturally significant solution for Bangla-speaking communities.</li>' +   
+                '</ul>', 
+    },
+    tools: [ 'Arduino IDE', 'ESP8266 NodeMCU', 'MAX7219 LED Dot Matrix Displays', 'Dot Matrix Tool', 'ESP8266WiFi.h', 'MD_Parola.h', 'MD_MAX72xx.h', 'Max72xxPanel.h' ]
+},
+'Class-A RF Power Amplifier for GSM 900 MHz': {
+    title: 'Design and Simulation of a Class-A RF Power Amplifier for the GSM 900 MHz Band Using Common-Emitter Topology',
+    images: [
+        'images/project-details/RF1.png', 
+        'images/project-details/RF2.png', 
+        'images/project-details/RF3.png',
+        'images/project-details/RF4.png',
+        'images/project-details/RF5.png',
+        'images/project-details/RF6.png'
+    ],
+    details: {
+        what: 'The "Class-A RF Power Amplifier for GSM 900 MHz" was designed and simulated using a common-emitter topology to achieve high linearity and stable gain. The project targeted GSM applications with key performance goals: Gain ≥ 10 dB, Psat ≥ 15 dBm, and PAE ≥ 5%. Simulation and analysis were carried out using Cadence Virtuoso and SpectreRF with proper biasing, impedance matching, and harmonic balance analysis.',
+        myContribution: 'I contributed to the following aspects of the project:' +
+                        '<ul>' +
+                        '<li>Worked on DC biasing to ensure proper Class-A operation.</li>' +
+                        '<li>Designed input and output impedance matching networks using Smith Chart and S-parameters.</li>' +
+                        '<li>Tuned the circuit and performed verification with calculations to validate performance metrics.</li>' +
+                        '</ul>',
+        result: 'The project achieved and exceeded its design targets. Key outcomes include:' +  
+                '<ul>' +  
+                '<li>Gain of 16.67 dB (greater than the 10 dB requirement).</li>' +  
+                '<li>Saturated output power (Psat) of 19.99 dBm and Power Added Efficiency (PAE) of 18.32%.</li>' +  
+                '<li>Verified stable, linear operation suitable for GSM 900 MHz applications.</li>' +   
+                '</ul>', 
+    },
+    tools: [ 'Cadence Virtuoso', 'SpectreRF Simulator', 'Smith Chart techniques', 'gpdk090 BJT models' ]
+},
         };
+        document.querySelectorAll('.work .layer a').forEach(a => {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const card = this.closest('.work');
+    const projectTitle = card ? card.dataset.project : null;
+    if (projectTitle) openProjectDetails(projectTitle);
+  });
+});
+// Event listener for project clicks
+document.addEventListener("DOMContentLoaded", function () {
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-        // Event listener for project clicks
-       // Event listener for project clicks
-document.addEventListener("DOMContentLoaded", function() {
-    // Check if device is mobile (using media query)
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    
-    document.querySelectorAll('.work').forEach(work => {
-        if (isMobile) {
-            // Mobile behavior - two click pattern
-            work.addEventListener('click', function(e) {
-                const layer = this.querySelector('.layer');
-                
-                // If the layer is already active and the click is on the layer, open project details
-                if (layer.classList.contains('active') && e.target.closest('.layer')) {
-                    // Get project title and open project details
-                    const projectTitle = this.querySelector('.layer h3').textContent;
-                    openProjectDetails(projectTitle);
-                } 
-                // Otherwise toggle the layer visibility
-                else {
-                    // First deactivate all other layers
-                    document.querySelectorAll('.work .layer').forEach(otherLayer => {
-                        if (otherLayer !== layer) {
-                            otherLayer.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle current layer
-                    layer.classList.toggle('active');
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            });
-        } else {
-            // Desktop behavior - direct click to open details
-            work.addEventListener('click', function() {
-                const projectTitle = this.querySelector('.layer h3').textContent;
-                openProjectDetails(projectTitle);
-            });
+  document.querySelectorAll('.work').forEach(work => {
+    if (isMobile) {
+      // Mobile behavior - two click pattern
+      work.addEventListener('click', function (e) {
+        const layer = this.querySelector('.layer');
+        if (!layer) return;
+
+        // If the layer is already active and the tap is on the layer, open details
+        if (layer.classList.contains('active') && e.target.closest('.layer')) {
+          const projectTitle = this.dataset.project; // FIX
+          if (projectTitle) openProjectDetails(projectTitle);
+          return;
         }
+
+        // Otherwise toggle the layer visibility
+        document.querySelectorAll('.work .layer').forEach(otherLayer => {
+          if (otherLayer !== layer) otherLayer.classList.remove('active');
+        });
+
+        layer.classList.toggle('active');
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    } else {
+      // Desktop behavior - direct click to open details
+      work.addEventListener('click', function (e) {
+        e.preventDefault(); // prevent inner <a href="#"> from jumping
+        const projectTitle = this.dataset.project; // FIX
+        if (projectTitle) openProjectDetails(projectTitle);
+      });
+    }
+  });
+
+  // Make the square icon behave (don’t navigate to "#")
+  document.querySelectorAll('.work .layer a').forEach(a => {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const card = this.closest('.work');
+      const projectTitle = card ? card.dataset.project : null;
+      if (projectTitle) openProjectDetails(projectTitle);
     });
+  });
+});
 
     // Function to open project details
     function openProjectDetails(projectTitle) {
-        const project = projectDetails[projectTitle];
+      const project = projectDetails[projectTitle];
+      if (!project) {
+        console.warn('No project details found for:', projectTitle);
+        return;
+      }
+
+      const detailsContainer = document.querySelector('.project-details-content');
+      detailsContainer.innerHTML = `
+        <div class="project-header">
+          <h2>${project.title}</h2>
+          <div class="project-tools-tag">
+            ${project.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+          </div>
+        </div>
         
-        if (project) {
-            const detailsContainer = document.querySelector('.project-details-content');
-            detailsContainer.innerHTML = `
-                <div class="project-header">
-                    <h2>${project.title}</h2>
-                    <div class="project-tools-tag">
-                        ${project.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
-                    </div>
-                </div>
-                
-                <div class="project-image-gallery">
-                    ${project.images.map((img, index) => `
-                        <div class="gallery-item ${index === 0 ? 'active' : ''}">
-                            <img src="${img}" alt="Project Image ${index + 1}">
-                        </div>
-                    `).join('')}
-                    <div class="gallery-nav">
-                        <button class="gallery-prev">&lt;</button>
-                        <button class="gallery-next">&gt;</button>
-                    </div>
-                </div>
-                
-                <div class="project-details-section">
-                    <div class="detail-block">
-                        <h3>What</h3>
-                        <p>${project.details.what}</p>
-                    </div>
-                    <div class="detail-block">
-                        <h3>My contribution</h3>
-                        ${project.details.myContribution}
-                    </div>
-                    <div class="detail-block">
-                        <h3>Result</h3>
-                        ${project.details.result}
-                    </div>
-                </div>
-            `;
-            
-            // Image gallery navigation
-            const galleryItems = detailsContainer.querySelectorAll('.gallery-item');
-            const prevBtn = detailsContainer.querySelector('.gallery-prev');
-            const nextBtn = detailsContainer.querySelector('.gallery-next');
-            let currentImageIndex = 0;
+        <div class="project-image-gallery">
+          ${project.images.map((img, index) => `
+  <div class="gallery-item ${index === 0 ? 'active' : ''}">
+    <img src="${img}" alt="Project Image ${index + 1}">
+  </div>
+`).join('')}
+          <div class="gallery-nav">
+            <button class="gallery-prev">&lt;</button>
+            <button class="gallery-next">&gt;</button>
+          </div>
+        </div>
+        
+        <div class="project-details-section">
+          <div class="detail-block">
+            <h3>What</h3>
+            <p>${project.details.what}</p>
+          </div>
+          <div class="detail-block">
+            <h3>My contribution</h3>
+            ${project.details.myContribution}
+          </div>
+          <div class="detail-block">
+            <h3>Result</h3>
+            ${project.details.result}
+          </div>
+        </div>
+      `;
 
-            function updateGallery() {
-                galleryItems.forEach((item, index) => {
-                    item.classList.toggle('active', index === currentImageIndex);
-                });
-            }
+      // Image gallery navigation
+      const galleryItems = detailsContainer.querySelectorAll('.gallery-item');
+      const prevBtn = detailsContainer.querySelector('.gallery-prev');
+      const nextBtn = detailsContainer.querySelector('.gallery-next');
+      let currentImageIndex = 0;
 
-            prevBtn.addEventListener('click', () => {
-                currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
-                updateGallery();
-            });
+      function updateGallery() {
+        galleryItems.forEach((item, index) => {
+          item.classList.toggle('active', index === currentImageIndex);
+          item.style.display = index === currentImageIndex ? 'block' : 'none'; // ensure only active shows
+        });
+      }
+      updateGallery();
 
-            nextBtn.addEventListener('click', () => {
-                currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
-                updateGallery();
-            });
-            
-            document.getElementById('project-details-overlay').style.display = 'flex';
-        }
+      prevBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateGallery();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+        updateGallery();
+      });
+      
+      document.getElementById('project-details-overlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     }
 
     // Close project details
     document.querySelector('.close-details').addEventListener('click', function() {
-        document.getElementById('project-details-overlay').style.display = 'none';
+      document.getElementById('project-details-overlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
     });
 
     // Close when clicking outside the details
     document.getElementById('project-details-overlay').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.style.display = 'none';
-        }
+      if (e.target === this) {
+        this.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      }
     });
-});
+  });
 
-    // Reset click counters when clicking elsewhere
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.work')) {
-            document.querySelectorAll('.work .layer').forEach(layer => {
-                layer.classList.remove('active');
-            });
-        }
-    });
+  // Reset click counters when clicking elsewhere
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.work')) {
+      document.querySelectorAll('.work .layer').forEach(layer => {
+        layer.classList.remove('active');
+      });
+    }
+  });
 
-        var sidemeu = document.getElementById("sidemenu");
-    
-        function openmenu() {
-            sidemeu.style.right = "0";
-        }
-    
-        function closemenu() {
-            sidemeu.style.right = "-200px";
-        }
-    </script>
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-</body>
-</html>
+  var sidemeu = document.getElementById("sidemenu");
+  function openmenu() { sidemeu.style.right = "0"; }
+  function closemenu() { sidemeu.style.right = "-200px"; }
+  </script>
